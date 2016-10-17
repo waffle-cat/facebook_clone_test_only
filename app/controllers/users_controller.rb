@@ -11,21 +11,36 @@ class UsersController < ApplicationController
 		user = User.new(user_params)
 
 		if user.save
-			redirect_to "/user/user.id"
+			flash[:notice] = "Account created. Please log in now."
+			redirect_to "/users/#{user.id}"
 		else
+			flash[:alert] = "Error creating account: "
 			render :new
 		end
 
 	end
 
 	def edit
-		@user = user.find(params[:id])
+		@user = User.find(params[:id])
 	end
 
 	def update
+		@user = User.find(params[:id])
+
+		if @user.update(user_params)
+
+		else
+			render :edit
+		end
 	end
 
 	def destroy
+		user = User.find(params[:id])
+		user.destroy
+
+		flash[:notice] = "Account is deleted"
+		redirect_to statuses_path
+
 	end
 
 	private

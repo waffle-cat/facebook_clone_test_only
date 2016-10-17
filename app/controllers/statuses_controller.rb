@@ -9,10 +9,10 @@ class StatusesController < ApplicationController
 	end
 
 	def create
-		status = Status.new(status_params)
+		status = current_user.Status.new(status_params)
 
 		if status.save
-			
+
 		else
 			render :new
 		end
