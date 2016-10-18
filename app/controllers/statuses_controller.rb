@@ -9,7 +9,11 @@ class StatusesController < ApplicationController
 	end
 
 	def create
-		status = current_user.statuses.new(status_params)
+		# Unfortunately, this doesn't work without breaking users_controller :(
+		# Tentatively leaving it here for now.
+		# status = current_user.statuses.new(status_params)
+
+		status = Status.new(status_params)
 
 		if status.save
 			flash[:notice] = "Status is created successfully."
