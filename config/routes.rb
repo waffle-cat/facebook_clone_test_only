@@ -4,12 +4,13 @@ Rails.application.routes.draw do
 
 	resources :sessions, only: [:create, :new, :destoy]
 	get '/signup', to: 'users#new'
-	get '/logout', to: 'sessions#destroy'
+	get '/signout', to: 'sessions#destroy'
 	get '/login', to: 'sessions#new'
 
 	resources :users
 	resources :statuses
 	resources :sessions
 	resources :likes
+	resources :welcome, only: :index
 
 end

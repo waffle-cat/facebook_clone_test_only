@@ -2,7 +2,7 @@ class LikesController < ApplicationController
 	def create
 		status = Status.find(params[:like][:status])
 		current_user_id = session[:user_id]
-
+		
 		# If the current_user has not liked before
 		if status.likes.find_by(user_id: current_user_id) == nil
 			like = status.likes.new
